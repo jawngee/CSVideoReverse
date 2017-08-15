@@ -8,30 +8,40 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+
+/**
+ CSVideoReverse delegate
+ */
 @protocol CSVideoReverseDelegate <NSObject>
+
 @optional
+
+/**
+ Called when the video has finished being reversed
+
+ @param success YES if successful, NO if not
+ @param error If not successful, the NSError encapsulating the problem
+ */
 - (void)didFinishReverse:(bool)success withError:(NSError *)error;
+
 @end
 
-@interface CSVideoReverse : NSObject {
 
-}
+/**
+ Utility class for reversing videos
+ */
+@interface CSVideoReverse : NSObject
 
-/*---------------------------------------------------------------*/
-// Properties
-/*---------------------------------------------------------------*/
+@property (weak, nonatomic) id<CSVideoReverseDelegate> delegate;    /**< Delegate */
+@property (readwrite, nonatomic) BOOL showDebug;                    /**< Show debug output messages when reversing */
+@property (strong, nonatomic) NSDictionary* readerOutputSettings;   /**< Output settings for reversed video */
 
-@property (weak, nonatomic) id<CSVideoReverseDelegate> delegate;
+/**
+ Reverses the video at a given path
 
-@property (readwrite, nonatomic) BOOL showDebug;
-
-@property (strong, nonatomic) NSDictionary* readerOutputSettings;
-
-
-/*---------------------------------------------------------------*/
-// Methods
-/*---------------------------------------------------------------*/
-
+ @param inputPath The path of the input video
+ @param outputPath The path for the reversed output video
+ */
 - (void)reverseVideoAtPath:(NSString *)inputPath outputPath:(NSString *)outputPath;
 
 @end

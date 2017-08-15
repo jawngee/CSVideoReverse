@@ -7,12 +7,7 @@
 
 #import "CSVideoReverse.h"
 
-@interface CSVideoReverse ()
-
-@end
-
-
-@implementation CSVideoReverse {
+@interface CSVideoReverse() {
     AVAssetReader *assetReader;
     AVAssetWriter *assetWriter;
     
@@ -20,6 +15,10 @@
     AVAssetWriterInput *assetWriterInput;
     AVAssetWriterInputPixelBufferAdaptor *assetWriterInputAdaptor;
 }
+@end
+
+
+@implementation CSVideoReverse
 
 - (id)init {
     self = [super init];
@@ -34,9 +33,7 @@
         NSLog(@"%s", __FUNCTION__);
 }
 
-/*---------------------------------------------------------------*/
-// delegate-related methods
-/*---------------------------------------------------------------*/
+#pragma mark - Delegate-related methods
 
 - (void)conveyErrorWithMessage:(NSString*)message {
     
@@ -64,9 +61,8 @@
     }
 }
 
-/*---------------------------------------------------------------*/
-// main method
-/*---------------------------------------------------------------*/
+
+#pragma mark - Reverse Methods
 
 // read input in multi-pass increments and write in reverse
 - (void)reverseVideoAtPath:(NSString *)inputPath outputPath:(NSString *)outputPath {
